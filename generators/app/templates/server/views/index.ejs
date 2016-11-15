@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BasilHealth: Become a Member</title>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% if (meta) {  for (var name in meta){ %>
+      <meta name="<%= name %>" content="<%= meta[name] %>">
+    <% } } %>
+
+    <link href="/assets/style.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div id="root"><%- prerender_content %></div>
+
+    <% if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'design') { %>
+      <script src="http://localhost:3000/webpack-dev-server.js"></script>
+    <% } %>
+
+    <script src="/assets/app.js"></script>
+  </body>
+</html>
