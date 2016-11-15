@@ -8,6 +8,7 @@ import SpikeComponent from 'espina/shared/base_component';
 import authenticate from 'shared/lib/mixins/authenticate_component';
 import indexContainer from './index.container';
 import { detailExample } from 'shared/reducers/current_example.reducer';
+import template from './index.rt.html';
 
 class IndexComponent
   extends authenticate(SpikeComponent) {

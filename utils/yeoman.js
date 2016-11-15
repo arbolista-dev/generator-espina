@@ -3,7 +3,6 @@
 const path = require('path');
 const configUtils = require('./config');
 const _ = require('underscore.string');
-const C = require('./constants');
 
 // Needed directory paths
 const baseName = path.basename(process.cwd());

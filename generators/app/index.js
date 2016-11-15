@@ -7,7 +7,39 @@ const fs = require('fs');
 var prompts = require('./prompts');
 const config = require('../../utils/config');
 
-const baseRootPath = path.join(path.dirname(require.resolve('react-webpack-template')), '..');
+const copyFiles = (scope,basepath,relativepath,exclusions) => {
+  //console.log(basepath);
+  fs.readdir(basepath, (err, items) => {
+    for(let item of items) {
+      let exclude = exclusions.find((suffix)=>{
+        return (item.indexOf(suffix) == item.length - suffix.length && item.indexOf(suffix)  !==-1) || item.indexOf("package.json") !==-1;
+      });
+      if(exclude){
+        //console.log("Excluido",item);
+        continue;
+      }
+      // Copy all items to our root
+      //console.log(item);
+      let fullPath = scope.templatePath(path.join(relativepath,item));
+
+      if(fs.lstatSync(fullPath).isDirectory()) {
+        copyFiles(scope,fullPath,path.join(relativepath,item),exclusions);
+      } else {
+        if (item === '.npmignore') {
+          //scope.copy(path.join(relativepath,item), '.gitignore');
+          scope.fs.copy(fullPath, scope.destinationPath(path.join(relativepath,".gitignore")));
+        } else if (item.indexOf(".ejs") !== -1){
+          scope.fs.copy(fullPath, scope.destinationPath(path.join(relativepath,item)));
+        } else {
+          scope.fs.copyTpl(fullPath, scope.destinationPath(path.join(relativepath,item)),{
+            template:scope.props.template
+          });
+          //scope.copy(path.join(relativepath,item), path.join(relativepath,item));
+        }
+      }
+    }
+  });
+};
 
 module.exports = yeoman.Base.extend({
   prompting: function () {
@@ -23,7 +55,8 @@ module.exports = yeoman.Base.extend({
   },
 
   configuring() {
-    let defaultSettings = this.fs.readJSON(`${baseRootPath}/generators/app/templates/package.json`);
+
+    let defaultSettings = this.fs.readJSON(this.templatePath("package.json"));
     let packageSettings = {
       name: this.props.appName,
       private: true,
@@ -48,33 +81,16 @@ module.exports = yeoman.Base.extend({
 
     this.fs.writeJSON(this.destinationPath('package.json'), packageSettings);
 
-  }
+  },
 
-
-  writing: function () {
-    let templateConfig = config.getChoiceByKey('template', this.props.template);
-
-    this.fs.readdir(this.sourceRoot(), (err, items) => {
-      for(let item of items) {
-        if(templateConfig.suffixExclude.indexOf(item) !== -1) {
-          continue;
-        }
-        // Copy all items to our root
-        let fullPath = path.join(baseRootPath, item);
-        if(fs.lstatSync(fullPath).isDirectory()) {
-          this.bulkDirectory(item, item);
-        } else {
-          if (item === '.npmignore') {
-            this.copy(item, '.gitignore');
-          } else {
-            this.copy(item, item);
-          }
-        }
-      }
-    });
+  writing() {
+    var templateConfig = config.getChoiceByKey('template', this.props.template);
+    //console.log(this.sourceRoot());
+    //console.log("===========")
+    copyFiles(this,this.sourceRoot(),"",templateConfig.suffixExclude);
   },
 
   install: function () {
-    this.installDependencies();
+    //this.installDependencies();
   }
 });

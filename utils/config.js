@@ -1,3 +1,5 @@
+'use strict';
+
 var opts = {
   "template": {
     "options": [
@@ -5,6 +7,7 @@ var opts = {
         "name": "JSX",
         "value": "jsx",
         "suffixExclude": [".rt.html",'.component.js'],
+         "packages": []
       },
       {
         "name": "React Templates",
@@ -12,7 +15,7 @@ var opts = {
         "suffixExclude":[".jsx"],
         "packages": [
           { "name": "react-templates", "version": ">= 0.4.0" },
-          { "name": "react-templates-loader", "version": ">= 0.4.0" }
+          { "name": "react-templates-loader", "version": ">= 0.4.0" },
           { "name":"babel-plugin-react-templates","version":">= 1.1.0"}
         ]
       }
@@ -58,7 +61,7 @@ let getChoiceByKey = (setting, key) => {
 
   for(let choice of choices) {
 
-    if(choice.name === key) {
+    if(choice.value === key) {
       result = choice;
       break;
     }

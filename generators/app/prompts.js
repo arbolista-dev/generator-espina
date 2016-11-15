@@ -1,6 +1,6 @@
 'use strict';
 const config = require('../../utils/config');
-const yeoman = require('./yeoman');
+const yeoman = require('../../utils/yeoman');
 
 module.exports = [
   {
@@ -13,7 +13,7 @@ module.exports = [
     type: 'input',
     name: 'description',
     message: 'Description of the new application',
-    default: "Author name here"
+    default: "Description"
   },
   {
     type: 'input',

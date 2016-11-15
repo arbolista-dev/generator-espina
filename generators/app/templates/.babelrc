@@ -1,0 +1,21 @@
+{
+  "presets": ["es2015", "react"],
+  "env": {
+    "production": {
+      "plugins": [
+        <% if (template == 'rt') { %> ["react-templates", {"ext": ".rt.html", "modules": "commonjs"}],<% } %>
+        ["module-alias", [
+          { "src": "./client/api/fixture", "expose": "api" }
+        ]]
+      ]
+    },
+    "development": {
+      "plugins": [
+         <% if (template == 'rt') { %>["react-templates", {"ext": ".rt.html", "modules": "commonjs"}],<% } %>
+        ["module-alias", [
+          { "src": "./client/api/fixture", "expose": "api" }
+        ]]
+      ]
+    }
+  }
+}

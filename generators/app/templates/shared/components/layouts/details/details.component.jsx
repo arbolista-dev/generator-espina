@@ -39,12 +39,11 @@ class DetailsComponent
             <div className="panel-heading">{this.example_full_name}</div>
             <div className="panel-body">
               <ul className="list-group">
-                {this.skills.map( (skill) =>{
-                    <li className="list-group-item"
-                      key={skillIndex}>
+                {this.skills.map( (skill,index) =>{
+                    return (<li className="list-group-item" key={index}>
                       {skill}
-                    </li>
-                  });
+                    </li>)
+                  })
                 }
               </ul>
             </div>

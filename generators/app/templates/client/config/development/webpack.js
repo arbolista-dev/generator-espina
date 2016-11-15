@@ -20,7 +20,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /(\.js|\.jsx)$/,
         loader: 'babel'
       }, {
         test: /\.scss$/,
@@ -82,6 +82,7 @@ module.exports = {
     fs: 'empty'
   },
   resolve: {
+    extensions: ['', '.js', '.jsx'],
     alias: {
       api: __dirname + `/../../api/fixture`,
       assets: __dirname + '/../../../server/assets',

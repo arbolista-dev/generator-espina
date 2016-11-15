@@ -9,19 +9,19 @@ class HeaderComponent extends SpikeComponent {
 
   get template(){
     return () => (
-      <nav style="margin-bottom:0px;" class="navbar navbar-default">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+      <nav style={{"marginBottom":"0px"}} className="navbar navbar-default">
+        <div className="container">
+          <div className="navbar-header">
+            <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" className="navbar-toggle collapsed">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">Spike</a>
+            <a href="/" className="navbar-brand">Spike</a>
           </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
+          <div id="navbar" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav navbar-right">
               {!this.logged_in ?
                 <li><a href="#"
                   onClick={this.login.bind(this)}>{this.t('Login')}</a></li>
