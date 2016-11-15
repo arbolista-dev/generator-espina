@@ -7,31 +7,33 @@ const fs = require('fs');
 var prompts = require('./prompts');
 const config = require('../../utils/config');
 
-const copyFiles = (scope,basepath,relativepath,exclusions) => {
-  //console.log(basepath);
+const copyFiles = (scope, basepath, relativepath, exclusions) => {
   fs.readdir(basepath, (err, items) => {
-    for(let item of items) {
+    if ( err ) {
+      return;
+    }
+    for ( let item of items ) {
       let exclude = exclusions.find((suffix)=>{
-        return (item.indexOf(suffix) == item.length - suffix.length && item.indexOf(suffix)  !==-1) || item.indexOf("package.json") !==-1;
+        return (item.indexOf(suffix) === item.length - suffix.length && item.indexOf(suffix)  !== -1) || item.indexOf("package.json") !==-1;
       });
-      if(exclude){
+      if( exclude ){
         //console.log("Excluido",item);
         continue;
       }
       // Copy all items to our root
       //console.log(item);
-      let fullPath = scope.templatePath(path.join(relativepath,item));
+      let fullPath = scope.templatePath(path.join(relativepath, item));
 
-      if(fs.lstatSync(fullPath).isDirectory()) {
-        copyFiles(scope,fullPath,path.join(relativepath,item),exclusions);
+      if (fs.lstatSync(fullPath).isDirectory()) {
+        copyFiles(scope,fullPath,path.join(relativepath, item), exclusions);
       } else {
-        if (item === '.npmignore') {
+        if ( item === '.npmignore' ) {
           //scope.copy(path.join(relativepath,item), '.gitignore');
-          scope.fs.copy(fullPath, scope.destinationPath(path.join(relativepath,".gitignore")));
-        } else if (item.indexOf(".ejs") !== -1){
-          scope.fs.copy(fullPath, scope.destinationPath(path.join(relativepath,item)));
+          scope.fs.copy(fullPath, scope.destinationPath(path.join(relativepath, ".gitignore")));
+        } else if ( item.indexOf(".ejs") > 0 ){
+          scope.fs.copy(fullPath, scope.destinationPath(path.join(relativepath, item)));
         } else {
-          scope.fs.copyTpl(fullPath, scope.destinationPath(path.join(relativepath,item)),{
+          scope.fs.copyTpl(fullPath, scope.destinationPath(path.join(relativepath, item)),{
             template:scope.props.template
           });
           //scope.copy(path.join(relativepath,item), path.join(relativepath,item));
@@ -87,7 +89,7 @@ module.exports = yeoman.Base.extend({
     var templateConfig = config.getChoiceByKey('template', this.props.template);
     //console.log(this.sourceRoot());
     //console.log("===========")
-    copyFiles(this,this.sourceRoot(),"",templateConfig.suffixExclude);
+    copyFiles(this,this.sourceRoot(), "", templateConfig.suffixExclude);
   },
 
   install: function () {
