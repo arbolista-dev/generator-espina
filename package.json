@@ -1,6 +1,6 @@
 {
   "name": "generator-espina",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React isomorphic boilerplate generator using espina npm module",
   "homepage": "",
   "author": {
