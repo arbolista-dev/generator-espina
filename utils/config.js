@@ -1,5 +1,7 @@
 'use strict';
 
+const S = require('underscore.string');
+
 var opts = {
   "template": {
     "options": [
@@ -21,6 +23,46 @@ var opts = {
       }
     ],
     "default": "jsx"
+  },
+  "addons_component": {
+    "options": [
+      {
+        "name": "SASS File",
+        "value":"sass",
+        "checked": false,
+        "suffixExclude": [".scss"],
+        "packages": []
+      },
+      {
+        "name": "React Templates File",
+        "value":"rt",
+        "checked": false,
+        "suffixExclude":[".rt.html"],
+        "packages": [
+          { "name": "react-templates", "version": ">= 0.4.0" },
+          { "name": "react-templates-loader", "version": ">= 0.4.0" },
+          { "name":"babel-plugin-react-templates","version":">= 1.1.0"}
+        ]
+      },
+      {
+        "name": "Test File",
+        "value":"test",
+        "checked": false,
+        "suffixExclude":[".test.js"],
+        "packages": []
+      }
+    ]
+  },
+  "addons_reducer": {
+    "options": [
+      {
+        "name": "Test File",
+        "value":"test",
+        "checked": false,
+        "suffixExclude":[".test.js"],
+        "packages": []
+      }
+    ]
   }
 };
 
@@ -57,17 +99,22 @@ let getChoiceByKey = (setting, key) => {
     return null;
   }
 
-  let result = null;
-
   for(let choice of choices) {
 
     if(choice.value === key) {
-      result = choice;
-      break;
+      return choice;
     }
   }
 
-  return result;
+  return null;
+}
+
+const templateData = (componentName) =>{
+  return {
+    componentNameLowerCase: S.underscored(componentName),
+    componentNameCamelCase: S.classify(componentName),
+    componentNameCamelCaseDecapitalized: S.camelize(componentName),
+  };
 }
 
 /**
@@ -84,5 +131,6 @@ module.exports = {
   getSetting,
   getChoices,
   getChoiceByKey,
-  getDefaultChoice
+  getDefaultChoice,
+  templateData
 };

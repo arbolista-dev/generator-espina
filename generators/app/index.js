@@ -47,7 +47,7 @@ module.exports = yeoman.Base.extend({
   prompting: function () {
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the ' + chalk.red('generator-espina') + ' generator!'
+      'Welcome to the ' + chalk.red('espina app') + ' generator!'
     ));
 
     return this.prompt(prompts).then(function (props) {
@@ -93,6 +93,6 @@ module.exports = yeoman.Base.extend({
   },
 
   install: function () {
-    //this.installDependencies();
+    this.installDependencies();
   }
 });
