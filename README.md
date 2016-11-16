@@ -16,14 +16,19 @@ Then generate your new project:
 yo espina
 ```
 
-## Getting To Know Yeoman
+You can generate new React components 
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+```bash
+yo espina:component
+```
 
-## License
+Also generate new React reducers 
+
+```bash
+yo espina:reducer
+```
+
+
 
 MIT © [Eric Hulburd](http://www.arbolista.mx/)
 
