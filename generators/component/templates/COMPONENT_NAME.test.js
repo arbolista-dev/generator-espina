@@ -7,7 +7,7 @@ import <%= componentNameCamelCase %> from './<%= componentNameLowerCase %>.compo
 
 describe('<%= componentNameCamelCase %> component', ()=>{
   it('renders without problems', (done)=>{
-      <%= componentNameLowerCase %> = TestUtils.renderIntoDocument(React.createElement(<%= componentNameCamelCase %>) );
+      let <%= componentNameLowerCase %> = TestUtils.renderIntoDocument(React.createElement(<%= componentNameCamelCase %>) );
       expect(<%= componentNameLowerCase %>.state).toEqual({});
       done();
   });

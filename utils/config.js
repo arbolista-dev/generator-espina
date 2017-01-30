@@ -111,7 +111,7 @@ let getChoiceByKey = (setting, key) => {
 
 const templateData = (componentName) =>{
   return {
-    componentNameLowerCase: S.underscored(componentName),
+    componentNameLowerCase: S.camelize(componentName),
     componentNameCamelCase: S.classify(componentName),
     componentNameCamelCaseDecapitalized: S.camelize(componentName),
   };

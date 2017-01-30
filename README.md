@@ -1,6 +1,9 @@
 # generator-espina [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > A React isomorphic boilerplate generator using espina npm module
 
+
+
+
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-espina using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
@@ -28,7 +31,13 @@ Also generate new React reducers
 yo espina:reducer
 ```
 
+## Develop
 
+For develop purposes, you can test you new version using
+
+```bash
+npm run prepublish
+```
 
 MIT © [Eric Hulburd](http://www.arbolista.mx/)
 
